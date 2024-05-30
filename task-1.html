@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Обчислення значень тригонометричних функцій</title>
+    <script>
+        function validateForm() {
+            var startAngle = parseFloat(document.forms["trigForm"]["startAngle"].value);
+            var endAngle = parseFloat(document.forms["trigForm"]["endAngle"].value);
+            var step = parseFloat(document.forms["trigForm"]["step"].value);
+
+            if (isNaN(startAngle) || isNaN(endAngle) || isNaN(step)) {
+                alert("Будь ласка, введіть числові значення для кутів та кроку.");
+                return false;
+            }
+
+            if (startAngle >= endAngle) {
+                alert("Початковий кут повинен бути менше за кінцевий кут.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Обчислення значень тригонометричних функцій</h1>
+    <form name="trigForm" action="task-1table.html" onsubmit="return validateForm()" method="get">
+        <label for="function">Тригонометрична функція:</label>
+        <select id="function" name="function">
+            <option value="sin">sin</option>
+            <option value="cos">cos</option>
+            <option value="tan">tan</option>
+        </select><br><br>
+        <label for="startAngle">Початковий кут (градуси):</label>
+        <input type="number" id="startAngle" name="startAngle" required><br><br>
+        <label for="endAngle">Кінцевий кут (градуси):</label>
+        <input type="number" id="endAngle" name="endAngle" required><br><br>
+        <label for="step">Крок:</label>
+        <input type="text" id="step" name="step" required><br><br>
+        <input type="submit" value="Обчислити">
+    </form>
+</body>
+</html>

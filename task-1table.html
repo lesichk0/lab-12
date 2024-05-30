@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Таблиця значень тригонометричних функцій</title>
+</head>
+<body>
+    <h1>Таблиця значень тригонометричних функцій</h1>
+
+    <table border="1" id="resultTable">
+        <thead>
+            <tr>
+                <th>Кут (градуси)</th>
+                <th>Кут (радіани)</th>
+                <th id="functionLabel">Тригонометрична функція</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        function generateTable() {
+            var functionType = new URLSearchParams(window.location.search).get('function');
+            var startAngle = parseFloat(new URLSearchParams(window.location.search).get('startAngle'));
+            var endAngle = parseFloat(new URLSearchParams(window.location.search).get('endAngle'));
+            var step = parseFloat(new URLSearchParams(window.location.search).get('step'));
+
+            var tableBody = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+
+            var functionLabel = document.getElementById('functionLabel');
+            functionLabel.textContent = functionType.toUpperCase();
+
+            for (var angle = startAngle; angle <= endAngle; angle += step) {
+                var angleRadians = angle * (Math.PI / 180);
+                var functionValue = '';
+
+                switch (functionType) {
+                    case 'sin':
+                        functionValue = Math.sin(angleRadians);
+                        break;
+                    case 'cos':
+                        functionValue = Math.cos(angleRadians);
+                        break;
+                    case 'tan':
+                        functionValue = Math.tan(angleRadians);
+                        break;
+                }
+
+                var newRow = tableBody.insertRow();
+                newRow.insertCell().textContent = angle.toFixed(2);
+                newRow.insertCell().textContent = angleRadians.toFixed(2);
+                newRow.insertCell().textContent = functionValue.toFixed(5);
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = generateTable;
+    </script>
+</body>
+</html>

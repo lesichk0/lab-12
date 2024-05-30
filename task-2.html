@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Облік надходження товарів</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Облік надходження товарів</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Назва товару</th>
+                <th>Ціна за одиницю</th>
+                <th>Кількість</th>
+                <th>Вартість</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Стіл офісний</td>
+                <td contenteditable="true">1500</td>
+                <td contenteditable="true">2</td>
+                <td>3000</td>
+            </tr>
+            <tr>
+                <td>Стіл кухонний</td>
+                <td contenteditable="true">800</td>
+                <td contenteditable="true">1</td>
+                <td>800</td>
+            </tr>
+            <tr>
+                <td>Стільчик</td>
+                <td contenteditable="true">300</td>
+                <td contenteditable="true">4</td>
+                <td>1200</td>
+            </tr>
+            <tr>
+                <td>Шафа</td>
+                <td contenteditable="true">2000</td>
+                <td contenteditable="true">1</td>
+                <td>2000</td>
+            </tr>
+            <tr>
+                <th colspan="3">Сума</th>
+                <th>7000</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Зміна ціни й кількості</h2>
+    <form id="changeForm">
+        <label for="productSelect">Товар:</label>
+        <select id="productSelect" style="margin-bottom: 10px;">
+            <option value="Стіл офісний">Стіл офісний</option>
+            <option value="Стіл кухонний">Стіл кухонний</option>
+            <option value="Стільчик">Стільчик</option>
+            <option value="Шафа">Шафа</option>
+        </select>
+        <br>
+        <label for="newPrice">Ціна:</label>
+        <input type="number" id="newPrice" style="margin-bottom: 10px;">
+        <br>
+        <label for="newQuantity">Кількість:</label>
+        <input type="number" id="newQuantity" style="margin-bottom: 10px;">
+        <br>
+        <button type="button" onclick="changeProduct()">Змінити</button>
+    </form>
+
+    <script>
+        function changeProduct() {
+            var productName = document.getElementById('productSelect').value;
+            var newPrice = document.getElementById('newPrice').value;
+            var newQuantity = document.getElementById('newQuantity').value;
+
+            var rows = document.getElementsByTagName('tr');
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td');
+                if (cells.length > 0 && cells[0].textContent === productName) {
+                    cells[1].textContent = newPrice;
+                    cells[2].textContent = newQuantity;
+                    cells[3].textContent = newPrice * newQuantity;
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
